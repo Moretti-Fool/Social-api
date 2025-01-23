@@ -1,4 +1,4 @@
-__pycahce__
+__pycache__
 venv/
 .env
 app/main_without_ORM.py
