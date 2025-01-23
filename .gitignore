@@ -1,0 +1,7 @@
+__pycahce__
+venv/
+.env
+app/main_without_ORM.py
+app/main_without_Sql.py
+notes.txt
+example.py
