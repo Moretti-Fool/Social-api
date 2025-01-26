@@ -1,12 +1,18 @@
 from fastapi import FastAPI
 from .database import engine
-from . import models
+#from . import models
 from .routers import post, user, auth, vote
-from .config import settings
+#from .config import settings
 from fastapi.middleware.cors import CORSMiddleware
 #models.Base.metadata.create_all(bind=engine) -> as we are using alembic we do not need to use this
 
-app = FastAPI()
+app = FastAPI(
+    root_path="/doc",
+    docs_url="/",  # Serve Redoc at the root
+    openapi_url="/openapi.json"
+)
+
+
 
 origins = ["*"]
 
@@ -25,9 +31,7 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
 
-@app.get("/") 
-def root():
-    return {"message": "Welcome to My API"}
+
 
 
 
