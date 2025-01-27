@@ -8,10 +8,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     root_path="/doc",
-    docs_url="/",  # Serve Redoc at the root
+    servers=[
+        {"url": "/redoc", "description": "ReDoc Documentation"},
+        {"url": "/doc", "description": "Swagger UI Documentation"}
+    ],
+    docs_url="/",  # Swagger UI URL
+    redoc_url="/redoc",  # ReDoc URL
     openapi_url="/openapi.json"
 )
-
 
 
 origins = ["*"]
