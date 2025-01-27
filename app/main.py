@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.requests import Request
+from fastapi.staticfiles import StaticFiles
 #from .database import engine
 #from . import models
 from .routers import post, user, auth, vote
@@ -16,7 +17,7 @@ app = FastAPI(
     openapi_url="/openapi.json"
 )
 
-templates = Jinja2Templates(directory="app/templates")
+
 origins = ["*"]
 
 app.add_middleware(
@@ -34,6 +35,9 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
 
+
+templates = Jinja2Templates(directory="app/templates")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
 # Route to serve the index page

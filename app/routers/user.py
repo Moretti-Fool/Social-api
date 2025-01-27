@@ -43,9 +43,9 @@ def get_posts(db: Session = Depends(get_db), current_user : int = Depends(oauth2
     return posts
 
 # FETCH USER DETAILS
-@router.get("/{id}", response_model=schemas.UserOut)
-def get_user(id: int, db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
-    user = db.query(models.User).filter(models.User.id == id).first()
+@router.get("/details", response_model=schemas.UserOut)
+def get_user(db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
+    user = db.query(models.User).filter(models.User.id == current_user.id).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with {id} does not exists")
     

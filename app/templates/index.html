@@ -4,13 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Welcome to the API Documentation</h1>
-    <p>Choose the documentation style you prefer:</p>
-    <ul>
-        <li><a href="/doc">Swagger UI</a></li>
-        <li><a href="/redoc">ReDoc</a></li>
-    </ul>
+    <header>
+        <h1>Welcome to the FastAPI-powered API</h1>
+    </header>
+    <div class="container">
+        <!-- Left Section: API Details -->
+        <section class="api-details">
+            <p>This API provides endpoints for managing posts, users, and voting functionalities. Below are the main features:</p>
+
+            <h2>Posts</h2>
+            <ul>
+                <li><strong>Get Posts:</strong> Retrieve a list of posts with options to limit the results, skip entries, and search by keyword.</li>
+                <li><strong>Create Post:</strong> Add a new post with a title, content, and publication status.</li>
+                <li><strong>Get Post by ID:</strong> Retrieve details of a specific post.</li>
+                <li><strong>Update Post:</strong> Modify an existing post's title, content, or publication status.</li>
+                <li><strong>Delete Post:</strong> Remove a specific post by ID.</li>
+            </ul>
+
+            <h2>Users</h2>
+            <ul>
+                <li><strong>Create User:</strong> Register a new user by providing an email and password.</li>
+                <li><strong>Get User:</strong> View details of a specific user.</li>
+                <li><strong>Get User's Posts:</strong> Retrieve all posts created by a specific user.</li>
+            </ul>
+
+            <h2>Authentication</h2>
+            <ul>
+                <li><strong>Login:</strong> Users can authenticate via username and password, receiving an access token for future requests.</li>
+            </ul>
+
+            <h2>Voting</h2>
+            <ul>
+                <li><strong>Vote:</strong> Users can vote on posts, where the vote direction is specified.</li>
+            </ul>
+        </section>
+
+        <!-- Right Section: Documentation Style Links -->
+        <section class="docs-options">
+            <p>Choose the documentation style you prefer:</p>
+            <ul>
+                <li><a href="/doc" class="btn">Swagger UI</a></li>
+                <li><a href="/redoc" class="btn">ReDoc</a></li>
+            </ul>
+        </section>
+    </div>
 </body>
 </html>
