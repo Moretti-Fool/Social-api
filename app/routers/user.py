@@ -10,10 +10,11 @@ router = APIRouter(
 )
 
 
+
 # USER REGISTRATION
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
-def create_user(user: schemas.UserCreate, 
-                db: Session = Depends(get_db)):
+async def create_user(user: schemas.UserCreate, 
+                      db: Session = Depends(get_db)):
     if user.password != user.confirm_password:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -30,11 +31,19 @@ def create_user(user: schemas.UserCreate,
     # hash the password - user.password
     hashed_password = utils.hash(user.password)
     user.password = hashed_password
-    user = models.User(**user.model_dump(exclude={"confirm_password"}))
-    db.add(user)
+
+
+    new_user = models.User(
+        email=user.email,
+        password=hashed_password,
+    )
+    db.add(new_user)
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(new_user)
+    
+    return new_user
+
+
 
 # GET LOGGED IN USERS POSTS
 @router.get("/myposts", response_model=List[schemas.Post]) # If we don’t use List[schemas.Post], FastAPI will expect the response to be a single post (matching the schemas.Post model) instead of a list of posts. Since our function returns a list of posts, the response structure won’t match the expected model, and FastAPI will throw an error.

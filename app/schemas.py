@@ -20,6 +20,7 @@ class UserOut(BaseModel):
     created_at: datetime
 
 
+
 class Post(PostBase): # Response Schema , we dont need to mention title,content,published as it inherits from Postbase class, we only need to specify new columns
     id: int
     created_at: datetime
@@ -38,6 +39,7 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
     confirm_password: str
+
 
 
 
