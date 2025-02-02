@@ -3,8 +3,6 @@ __pycache__/
 venv/
 test/
 .env
-app/__pycache__/
-app/routers/__pycache__/
 app/main_without_ORM.py
 app/main_without_Sql.py
 notes.txt
