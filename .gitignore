@@ -1,8 +1,15 @@
-__pycache__
+__pycache__/
+.pytest_cache
 venv/
 .env
+app/__pycache__/
+app/routers/__pycache__/
+test/__pycache__/
 app/main_without_ORM.py
 app/main_without_Sql.py
 notes.txt
 example.py
 docker-compose-dev.yml
+test/test_calculations.py
+app/calculations.py
+test

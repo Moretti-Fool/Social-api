@@ -13,7 +13,7 @@ router = APIRouter(
 
 # USER REGISTRATION
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
-async def create_user(user: schemas.UserCreate, 
+def create_user(user: schemas.UserCreate, 
                       db: Session = Depends(get_db)):
     if user.password != user.confirm_password:
         raise HTTPException(
