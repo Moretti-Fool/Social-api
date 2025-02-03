@@ -9,5 +9,6 @@ notes.txt
 example.py
 docker-compose-dev.yml
 app/calculations.py
+testingDatabase/
 
 

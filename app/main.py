@@ -40,21 +40,18 @@ templates = Jinja2Templates(directory="app/templates")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
-# # Route to serve the index page
-# @app.get("/", response_class=HTMLResponse)
-# async def index(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request})
+# Route to serve the index page
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-# # Route to Swagger UI
-# @app.get("/doc")
-# async def custom_docs():
-#     return RedirectResponse(url="/swagger")
+# Route to Swagger UI
+@app.get("/doc")
+async def custom_docs():
+    return RedirectResponse(url="/swagger")
 
-# # Route to ReDoc
-# @app.get("/redoc")
-# async def custom_redoc():
-#     return RedirectResponse(url="/redoc")
+# Route to ReDoc
+@app.get("/redoc")
+async def custom_redoc():
+    return RedirectResponse(url="/redoc")
 
-@app.get("/")
-def root():
-    return {"message": "hello"}
