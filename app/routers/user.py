@@ -52,6 +52,15 @@ def get_posts(db: Session = Depends(get_db), current_user : int = Depends(oauth2
     
     return posts
 
+
+# GET LOGGED IN USER ONE POST (ID) 
+@router.get("/myposts/{id}", response_model=schemas.Post) # If we don’t use List[schemas.Post], FastAPI will expect the response to be a single post (matching the schemas.Post model) instead of a list of posts. Since our function returns a list of posts, the response structure won’t match the expected model, and FastAPI will throw an error.
+def get_posts(db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
+    posts = db.query(models.Post).filter(models.Post.id == id ).first() # grabs every row in the table
+    
+    return posts
+
+
 # FETCH USER DETAILS
 @router.get("/details", response_model=schemas.UserOut)
 def get_user(db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):

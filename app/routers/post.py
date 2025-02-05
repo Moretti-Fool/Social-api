@@ -48,7 +48,7 @@ def get_post(id: int, db: Session = Depends(get_db),current_user : int = Depends
     #post = db.query(models.Post).filter(models.Post.id == id).first() # do not do .all() it will throw an error as it will keep searching for similar id post even it has already found one post that matches the id
     post = db.query(models.Post, func.count(models.Votes.post_id).label("votes")).join(
             models.Votes, models.Votes.post_id == models.Post.id, isouter=True).group_by(
-            models.Post.id).first()
+            models.Post.id).filter(models.Post.id == id).first()
     if not post: 
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
                             detail=f"post with id {id} was not found")
