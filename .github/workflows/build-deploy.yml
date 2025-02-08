@@ -49,18 +49,18 @@ jobs:
               with:
                 username: ${{ secrets.DOCKER_HUB_USERNAME }}
                 password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN}}
-            - name: Set up Docker Buildx
-              uses: docker/setup-buildx-action@v3
             - name: Build and push Docker image
+              id: docker_build
               uses: docker/build-push-action@v6
               with:
-                push: true
+                context: ./
+                file: ./Dockerfile
                 builder: ${{steps.buildx.outputs.name}}
-                tags: ${{ steps.meta.outputs.tags }}
-                labels: ${{ steps.meta.outputs.labels }}
+                push: true
+                tags: ${{secrets.DOCKER_HUB_USERNAME}}/social-api:latest
                 provenance: true
                 sbom: true
-                cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/social-api:cache
-                cache-to: type=inline
+                cache-from: type=local,src=/tmp/.buildx-cache
+                cache-to: type=local,dest=/tmp/.buildx-cache
             - name: Image digest
               run: echo ${{steps.docker_build.outputs.digest}}
