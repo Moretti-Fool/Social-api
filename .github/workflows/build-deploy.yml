@@ -3,7 +3,7 @@ name: Build and Deploy Code
 on: [push, pull_request]
 
 jobs:
-    FirstRun:
+    Build:
         environment:
             name: testing
         env:
@@ -44,31 +44,58 @@ jobs:
             - name: Test with Pytest
               run: |
                 pytest
-            - name: Extract Docker image metadata
-              id: meta
-              uses: docker/metadata-action@v5
-              with:
-                images: ${{ secrets.DOCKER_HUB_USERNAME }}/my-image
-            - name: Log in to Docker Hub
-              uses: docker/login-action@v3
-              with:
-                username: ${{ secrets.DOCKER_HUB_USERNAME }}
-                password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-            - name: Set up Docker Buildx
-              id: buildx
-              uses: docker/setup-buildx-action@v3
-            - name: Build and push Docker image
-              id: docker_build
-              uses: docker/build-push-action@v6
-              with:
-                  context: ./
-                  file: ./Dockerfile
-                  push: true
-                  tags: ${{ secrets.DOCKER_HUB_USERNAME }}/social-api:latest
-                  annotations: ${{ steps.meta.outputs.annotations }}
-                  provenance: true
-                  sbom: true
-                  cache-from: type=local,src=/tmp/.buildx-cache
-                  cache-to: type=local,dest=/tmp/.buildx-cache
-            - name: Image Digest
-              run: echo ${{ steps.docker_build.outputs.digest}}
+            # - name: Extract Docker image metadata
+            #   id: meta
+            #   uses: docker/metadata-action@v5
+            #   with:
+            #     images: ${{ secrets.DOCKER_HUB_USERNAME }}/my-image
+            # - name: Log in to Docker Hub
+            #   uses: docker/login-action@v3
+            #   with:
+            #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+            # - name: Set up Docker Buildx
+            #   id: buildx
+            #   uses: docker/setup-buildx-action@v3
+            # - name: Build and push Docker image
+            #   id: docker_build
+            #   uses: docker/build-push-action@v6
+            #   with:
+            #       context: ./
+            #       file: ./Dockerfile
+            #       push: true
+            #       tags: ${{ secrets.DOCKER_HUB_USERNAME }}/social-api:latest
+            #       annotations: ${{ steps.meta.outputs.annotations }}
+            #       provenance: true
+            #       sbom: true
+            #       cache-from: type=local,src=/tmp/.buildx-cache
+            #       cache-to: type=local,dest=/tmp/.buildx-cache
+            # - name: Image Digest
+            #   run: echo ${{ steps.docker_build.outputs.digest}}
+
+            #CD
+
+    Deploy:
+      runs-on: ubuntu-latest
+      needs: [Build] # wait for build to run first
+
+      steps:
+
+        - name: Deploy
+        # Only run this step if the branch is main
+          if: github.ref == 'refs/heads/main'
+          env:
+            deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          run: |
+            curl "$deploy_url
+        # - name: Deploying
+        #   run: echo "ji"
+          # pull our github repo
+          # install render/heroku cli
+          # render login
+          # add git remote for render
+          # git push heroku main
+
+
+
+      
