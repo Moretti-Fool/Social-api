@@ -3,53 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation</title>
+    <title>Resource Management API Docs</title>
     <link rel="stylesheet" href="/static/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the FastAPI-powered API</h1>
+    <!-- Fixed Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>API Navigation</h2>
+        </div>
+        
+        <!-- Documentation Links -->
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Interactive Docs</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/doc" class="sidebar-link">
+                        <i class="fas fa-book"></i>
+                        Swagger UI
+                    </a>
+                </li>
+                <li>
+                    <a href="/redoc" class="sidebar-link">
+                        <i class="fas fa-file-alt"></i>
+                        ReDoc
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Source Code -->
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Source Code</h3>
+            <a href="https://github.com/Moretti-Fool/Social-api" class="sidebar-link">
+                <i class="fab fa-github"></i>
+                GitHub Repository
+            </a>
+        </div>
+
+        <!-- Contact Details -->
+        <div class="sidebar-section contact-section">
+            <h3 class="sidebar-title">Contact</h3>
+            <ul class="contact-list">
+                <li>
+                    <a href="https://sanchit-gupta.netlify.app/" class="sidebar-link">
+                        <i class="fas fa-briefcase"></i>
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:sanchitgupta534@gmail.com" class="sidebar-link">
+                        <i class="fas fa-envelope"></i>
+                        Email Me
+                    </a>
+                </li>
+                <li>
+                    <a href="https://linkedin.com/in/sanchitg534" class="sidebar-link">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="header">
+        <h1>Social Media API Documentation</h1>
+        <h3><strong>Built with FastAPI, PostgreSQL and Docker</strong></h3>
     </header>
     <div class="container">
         <!-- Left Section: API Details -->
-        <section class="api-details">
-            <p>This API provides endpoints for managing posts, users, and voting functionalities. Below are the main features:</p>
-
-            <h2>Posts</h2>
-            <ul>
-                <li><strong>Get Posts:</strong> Retrieve a list of posts with options to limit the results, skip entries, and search by keyword.</li>
-                <li><strong>Create Post:</strong> Add a new post with a title, content, and publication status.</li>
-                <li><strong>Get Post by ID:</strong> Retrieve details of a specific post.</li>
-                <li><strong>Update Post:</strong> Modify an existing post's title, content, or publication status.</li>
-                <li><strong>Delete Post:</strong> Remove a specific post by ID.</li>
-            </ul>
-
-            <h2>Users</h2>
-            <ul>
-                <li><strong>Create User:</strong> Register a new user by providing an email and password.</li>
-                <li><strong>Get User:</strong> View details of a specific user.</li>
-                <li><strong>Get User's Posts:</strong> Retrieve all posts created by a specific user.</li>
-            </ul>
-
-            <h2>Authentication</h2>
-            <ul>
-                <li><strong>Login:</strong> Users can authenticate via username and password, receiving an access token for future requests.</li>
-            </ul>
-
-            <h2>Voting</h2>
-            <ul>
-                <li><strong>Vote:</strong> Users can vote on posts, where the vote direction is specified.</li>
-            </ul>
-        </section>
-
-        <!-- Right Section: Documentation Style Links -->
-        <section class="docs-options">
-            <p>Choose the documentation style you prefer:</p>
-            <ul>
-                <li><a href="/doc" class="btn">Swagger UI</a></li>
-                <li><a href="/redoc" class="btn">ReDoc</a></li>
-            </ul>
-        </section>
+    <section class="api-details">
+        <h2 class="section-title">Posts Management</h2>
+        <ul class="feature-list">
+            <li><strong>Retrieve Posts:</strong> Fetch a list of posts with optional filters (limit, skip, and keyword search).</li>
+            <li><strong>Create Posts:</strong> Add new posts with fields like title, content, and publication status.</li>
+            <li><strong>Get Specific Post:</strong> Fetch detailed information about a single post using its ID.</li>
+            <li><strong>Update Posts:</strong> Modify existing posts (e.g., edit title, content, or publication status).</li>
+            <li><strong>Delete Posts:</strong> Remove posts permanently by their ID.</li>
+        </ul>
+    
+        <h2 class="section-title">Users Management</h2>
+        <ul class="feature-list">
+            <li><strong>User Registration:</strong> Create new users by providing email and password.</li>
+            <li><strong>Retrieve User Details:</strong> View information for a specific user.</li>
+            <li><strong>User-Specific Posts:</strong> Fetch all posts created by a particular user.</li>
+        </ul>
+    
+        <h2 class="section-title">Authentication</h2>
+        <ul class="feature-list">
+            <li><strong>User Login:</strong> Authenticate via username/password, receiving an access token for future requests.</li>
+        </ul>
+    
+        <h2 class="section-title">Voting System</h2>
+        <ul class="feature-list">
+            <li><strong>Vote on Posts:</strong> Users can cast votes on posts, with support for specifying the vote direction (e.g., upvote/downvote).</li>
+        </ul>
+</section>
     </div>
 </body>
 </html>
